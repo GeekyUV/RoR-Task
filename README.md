@@ -14,7 +14,7 @@
 ## Getting Started
 - Clone the repository:
 ```bash
- git clone git clone https://github.com/GeekyUV/RoR-Task.git
+git clone https://github.com/GeekyUV/RoR-Task.git
  ```
 
  - Set up the database:

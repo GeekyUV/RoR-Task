@@ -23,13 +23,63 @@ rails db:create
 rails db:migrate
  ```
 
-
+ - to put in dummy data for posts
+  ```bash
+rails db:seed
+ ```
+ 
  ```
 Start the Rails server:
 
 rails server or rails s
 
  ```
+
+ ## CURL's to test through Postman
+
+- to register a user 
+```bash
+curl --location 'http://localhost:3000/api/v1/register' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "user": {
+    "username": "yuvi",
+    "email": "yuvi@gmail.com",
+    "password": "yuvi@123"
+  }
+}'
+```
+
+- to login a user 
+```bash
+curl --location 'http://localhost:3000/api/v1/login' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "email": "yuvi@gmail.com",
+  "password": "yuvi@123"
+}'
+```
+
+- to create a post by logged in user
+```bash
+curl --location 'http://localhost:3000/api/v1/users/5/posts' \
+--header 'Authorization: Bearer YOUR_ACCESS_TOKEN' \
+--header 'Content-Type: application/json' \
+--data '{"post": {"title": "My Post", "content": "This is the content of my post."}}'
+```
+
+- to see posts for logged in user
+```bash
+curl --location 'http://localhost:3000/api/v1/users/5/posts'
+
+replace 5 with valid user_id
+```
+
+- to see the list of active users 
+```bash
+curl --location 'http://localhost:3000/api/v1/all_users'
+```
+
 
  ## EndPoints 
    
@@ -67,50 +117,6 @@ Get List of Active Users:
 - Purpose: Retrieve a list of active users.
 - Request: Requires an authentication token in headers.
 - Response: JSON array containing active users' details.
-
-## CURL's to test through Postman
-
-- to register a user 
-```bash
-curl --location 'http://localhost:3000/api/v1/register' \
---header 'Content-Type: application/json' \
---data-raw '{
-  "user": {
-    "username": "yuvi",
-    "email": "yuvi@gmail.com",
-    "password": "yuvi@123"
-  }
-}'
-```
-
-- to login a user 
-```bash
-curl --location 'http://localhost:3000/api/v1/login' \
---header 'Content-Type: application/json' \
---data-raw '{
-  "email": "yuvi@gmail.com",
-  "password": "yuvi@123"
-}'
-```
-- to see posts for logged in user
-```bash
-curl --location 'http://localhost:3000/api/v1/users/5/posts'
-
-replace 5 with valid user_id
-```
-
-- to create a post by logged in user
-```bash
-curl --location 'http://localhost:3000/api/v1/users/5/posts' \
---header 'Authorization: Bearer YOUR_ACCESS_TOKEN' \
---header 'Content-Type: application/json' \
---data '{"post": {"title": "My Post", "content": "This is the content of my post."}}'
-```
-
-- to see the list of active users 
-```bash
-curl --location 'http://localhost:3000/api/v1/all_users'
-```
 
 #### This project can be modified further and authentication token system can be introduced by using popular gems like devise and jwt.
 
